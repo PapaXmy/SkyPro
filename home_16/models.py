@@ -36,6 +36,13 @@ class Offer(db.Model):
     order_id = db.Column(db.Integer, db.ForeignKey("order.id"))
     executor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 
+    def create_dict(self):
+        return {
+            "id": self.id,
+            "order_id": self.order_id,
+            "executor_id": self.executor_id,
+        }
+
 
 #    order = db.relationship("Order")
 #    executor = db.relationship("User")
@@ -46,12 +53,25 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(200))
-    start_date = db.Column(db.Date)
-    end_date = db.Column(db.Date)
+    start_date = db.Column(db.Sring(100))
+    end_date = db.Column(db.String(100))
     adress = db.Column(db.String(100))
     price = db.Column(db.Integer)
     customer_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     executor_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+    def create_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "start_date": self.start_date,
+            "end_date": self.end_date,
+            "adress": self.adress,
+            "price": self.price,
+            "customer_id": self.customer_id,
+            "executor_id": self.executor_id,
+        }
 
 
 #    customer = db.relationship("User")
