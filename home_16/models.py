@@ -53,7 +53,7 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     description = db.Column(db.String(200))
-    start_date = db.Column(db.Sring(100))
+    start_date = db.Column(db.String(100))
     end_date = db.Column(db.String(100))
     adress = db.Column(db.String(100))
     price = db.Column(db.Integer)
