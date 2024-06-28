@@ -4,46 +4,59 @@ import json
 # users
 
 
-@app.route("/users")
-def users_page():
-    user_list = User.query.all()
+@app.route("/users", methods=["GET", "POST"])
+def users_all_page():
+    if request.method == "GET":
+        user_list = User.query.all()
 
-    user_response = []
+        user_response = []
 
-    for user in user_list:
-        user_response.append(
-            {
-                "id": user.id,
-                "first_name": user.first_name,
-                "last_name": user.last_name,
-                "age": user.age,
-                "email": user.email,
-                "role": user.role,
-                "phone": user.phone,
-            }
+        for user in user_list:
+            user_response.append(user_list.create_dict())
+
+        return json.dumps(user_response)
+
+    if request.method == "POST":
+        user_data = json.loads(request.data)
+        new_user = User(
+            id=user_data.get("id"),
+            first_name=user_data.get("first_name"),
+            last_name=user_data.get("last_name"),
+            age=user_data.get("age"),
+            email=user_data.get("email"),
+            role=user_data.get("role"),
+            phone=user_data.get("phone"),
         )
+        db.session.add(new_user)
+        db.session.commit()
+        return "User added"
 
-    return json.dumps(user_response)
 
-
-@app.route("/users/<int:id>")
+@app.route("/users/<int:id>", methods=["GET", "PUT", "DELETE"])
 def users_page_id(id: int):
-    user = User.query.get(id)
+    if request.method == "GET":
+        return json.dumps(User.query.get(id).create_dict())
 
-    if user is None:
+    if User.query.get(id) is None:
         return "Пользователь не найден!"
 
-    return json.dumps(
-        {
-            "id": user.id,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "age": user.age,
-            "email": user.email,
-            "role": user.role,
-            "phone": user.phone,
-        }
-    )
+    if request.method == "PUT":
+        user_data = json.loads(request.data)
+        update_user = (User.query.get(id),)
+        update_user.first_name = user_data.get("first_name")
+        update_user.last_name = user_data.get("last_name")
+        update_user.age = user_data.get("age")
+        update_user.email = user_data.get("email")
+        update_user.role = user_data.get("role")
+        update_user.phone = user_data.get("phone")
+
+        db.session.add(update_user)
+        db.session.commit()
+
+        return "Data user update"
+
+    if request.method == 'DELETE':
+        user = User.
 
 
 # offers
