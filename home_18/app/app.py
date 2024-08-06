@@ -6,11 +6,15 @@
 from flask import Flask
 from flask_restx import Api
 
-#
-from config import Config
+from app.config import Config
+
+# from app.config import Config
 
 # from models import Review, Book
-# from setup_db import db
+from app.setup_db import db
+from app.views.movie_view import movie_ns
+
+
 # from views.books import book_ns
 # from views.reviews import review_ns
 #
@@ -32,7 +36,7 @@ def create_app(config_object):
 def register_extensions(app):
     db.init_app(app)
     api = Api(app)
-    api.add_namespace(...)
+    api.add_namespace(movie_ns)
     create_data(app, db)
 
 
@@ -59,5 +63,5 @@ def create_data(app, db):
 if __name__ == "__main__":
     app_config = Config()
     app = create_app(app_config)
-    register_extensions(app)
+    #    register_extensions(app)
     app.run()
