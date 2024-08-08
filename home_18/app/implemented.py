@@ -1,5 +1,3 @@
-# файл для создания DAO и сервисов чтобы импортировать их везде
-
 from app.setup_db import db
 from app.service.movie_serice import MovieService
 from app.dao.movie_dao import MovieDAO
@@ -16,6 +14,3 @@ director_service = DirectorService(director_dao)
 
 genre_dao = GenreDAO(db.session)
 genre_service = GenreService(genre_dao)
-#
-# review_dao = ReviewDAO(db.session)
-# review_service = ReviewService(dao=review_dao)

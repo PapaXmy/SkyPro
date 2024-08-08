@@ -1,8 +1,3 @@
-# здесь бизнес логика, в виде классов или методов. сюда импортируются DAO классы из пакета dao и модели из dao.model
-# некоторые методы могут оказаться просто прослойкой между dao и views,
-# но чаще всего будет какая-то логика обработки данных сейчас или в будущем.
-
-# Пример
 from app.dao.movie_dao import MovieDAO
 
 
@@ -20,6 +15,8 @@ class MovieService:
             movie = self.movie_dao.get_all_movies_by_genre(filters.get("genre_id"))
         elif filters.get("year") is not None:
             movie = self.movie_dao.get_all_movies_by_year(filters.get("year"))
+        else:
+            movie = self.movie_dao.get_all_movies()
         return movie
 
     def get_movie(self, mid):
