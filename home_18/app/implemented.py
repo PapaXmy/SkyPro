@@ -7,6 +7,7 @@ from app.service.genre_service import GenreService
 from app.dao.genre_dao import GenreDAO
 from app.service.user_service import UserService
 from app.dao.user_dao import UserDAO
+from app.service.auth_service import AuthService
 
 movie_dao = MovieDAO(db.session)
 movie_service = MovieService(movie_dao)
@@ -19,3 +20,5 @@ genre_service = GenreService(genre_dao)
 
 user_dao = UserDAO(db.session)
 user_service = UserService(user_dao)
+
+auth_service = AuthService(user_service)

@@ -1,5 +1,5 @@
 from flask import request, abort
-from constants import secret, algo
+from app.constants import secret, algo
 import jwt
 
 def auth_required(func):
@@ -26,12 +26,15 @@ def admin_required(func):
 
         user_data = request.headers["Authorization"]
 
-        if not user_data.startswith("Bearer "):
-            abort(401)
+        # if not user_data.startswith("Bearer ")[-1]:
+        #     abort(401)
 
         token = user_data.split("Bearer ")[-1]
         try:
             decoded_token = jwt.decode(token, secret, algorithms=[algo])
+            user_role = decoded_token.get("role")
+            if user_role != "admin":
+                abort(403)
         except jwt.ExpiredSignatureError:
             abort(401)
         except jwt.InvalidTokenError:

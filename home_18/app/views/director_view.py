@@ -22,7 +22,7 @@ class DirectorsView(Resource):
     def post(self):
         director_json = request.json
         director_service.create_director(director_json)
-        return "", 201
+        return "Режисер добавлен!", 201
 
 
 @director_ns.route("/<int:uid>")
@@ -39,9 +39,9 @@ class DirectorView(Resource):
         director_json["id"] = did
 
         director_service.update_director(director_json)
-        return "", 204
+        return "Данные режисера изменены!", 204
 
     @admin_required
     def delete(self, did: int):
         director = director_service.delete_director(did)
-        return "", 204
+        return f"Режисер {director} удален!", 204

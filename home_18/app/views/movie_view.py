@@ -2,7 +2,7 @@ from flask_restx import Resource, Namespace
 from flask import request
 from app.dao.model.movie import MovieSchema
 from app.implemented import movie_service
-from ..decorators import auth_required, admin_required
+from app.decorators import auth_required, admin_required
 
 
 movie_ns = Namespace("movies")
@@ -27,7 +27,7 @@ class MoviesView(Resource):
     def post(self):
         movie_json = request.json
         movie_service.create_movie(movie_json)
-        return "", 201
+        return "Филь добавлен!", 201
 
 
 @movie_ns.route("/<int:uid>")
@@ -44,9 +44,9 @@ class MovieView(Resource):
         movie_json["id"] = uid
 
         movie_service.update_movie(movie_json)
-        return "", 204
+        return "Данные фильма изменены!", 204
 
     @admin_required
     def delete(self, uid: int):
         movie = movie_service.delete_movie(uid)
-        return "", 204
+        return f"Фильм {movie} удален!", 204

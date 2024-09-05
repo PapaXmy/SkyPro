@@ -21,7 +21,7 @@ class GenresView(Resource):
     def post(self):
         genre_json = request.json
         genre_service.create_genre(genre_json)
-        return "", 201
+        return "Жанр добавлен!", 201
 
 @genre_ns.route("/<int:uid>")
 class GenreView(Resource):
@@ -37,9 +37,9 @@ class GenreView(Resource):
         genre_json["id"] = gid
 
         genre_service.update_genre(genre_json)
-        return "", 204
+        return "Данные жанра изменены!", 204
 
     @admin_required
     def delete(self, gid: int):
         genre = genre_service.delete_genre(gid)
-        return "", 204
+        return f"Жанр {genre} удален!", 204

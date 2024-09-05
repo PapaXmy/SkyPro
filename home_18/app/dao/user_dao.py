@@ -15,6 +15,9 @@ class UserDAO:
             return None
         return user
 
+    def get_user_username(self, username):
+        return self.session.query(Users).filter(Users.username == username)
+
     def create_user(self, data):
         user = Users(**data)
 

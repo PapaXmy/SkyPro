@@ -1,5 +1,5 @@
 from app.dao.user_dao import UserDAO
-from app.config import Config
+from app.constants import PWD_HASH_SALT, PWD_HASH_ITERATIONS
 import hashlib
 import hmac
 import base64
@@ -15,25 +15,26 @@ class UserService:
     def get_one_user(self, uid):
         return self.user_dao.get_user(uid)
 
+    def get_user_username(self, username):
+        return self.user_dao.get_user_username(username).first()
+
     def get_hash(self, password):
-        return hashlib.pbkdf2_hmac(
+        return base64.b64encode(hashlib.pbkdf2_hmac(
             "sha256",
             password.encode("utf-8"),
-            Config.PWD_HASH_SALT,
-            Config.PDW_HASH_ITERATIONS,
-        ).decode("utf-8", "ignore")
+            PWD_HASH_SALT,
+            PWD_HASH_ITERATIONS,
+        ))
 
     def check_password(self, hashed_password, password) -> bool:
         return hmac.compare_digest(
-            base64.b64encode(
-                hashlib.pbkdf2_hmac(
+            base64.b64decode(hashed_password),
+            hashlib.pbkdf2_hmac(
                     "sha256",
-                    password.encode(),
-                    Config.PWD_HASH_SALT,
-                    Config.PWD_HASH_ITERATIONS,
+                    password.encode("utf-8"), PWD_HASH_SALT, PWD_HASH_ITERATIONS
                 )
             )
-        )
+
 
     def create_user(self, data):
         data["password"] = self.get_hash(data.get("password"))

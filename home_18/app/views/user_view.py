@@ -1,4 +1,4 @@
-import requests
+from flask import request
 from flask_restx import Resource, Namespace
 from ..implemented import user_service
 
@@ -8,6 +8,6 @@ user_ns = Namespace("users")
 class UsersView(Resource):
 
     def post(self):
-        user_json = requests.json
+        user_json = request.json
         user_service.create_user(user_json)
-        return "", 201
+        return "Пользователь добавлен!", 201
