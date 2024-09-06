@@ -1,12 +1,9 @@
 from flask_restx import Resource, Namespace
 from flask import request, abort
-from app.dao.model.user import UserSchema
 from app.implemented import auth_service
 
 
 auth_ns = Namespace("auth")
-user_schema = UserSchema()
-users_schema = UserSchema(many=True)
 
 
 @auth_ns.route("/")

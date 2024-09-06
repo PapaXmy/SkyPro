@@ -4,7 +4,6 @@ from app.implemented import director_service
 from ..decorators import auth_required, admin_required
 from flask import request
 
-
 director_ns = Namespace("directors")
 director_schema = DirectorSchema()
 directors_schema = DirectorSchema(many=True)

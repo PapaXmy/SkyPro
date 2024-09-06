@@ -30,11 +30,11 @@ class UserService:
         return hmac.compare_digest(
             base64.b64decode(hashed_password),
             hashlib.pbkdf2_hmac(
-                    "sha256",
-                    password.encode("utf-8"), PWD_HASH_SALT, PWD_HASH_ITERATIONS
-                )
+                "sha256",
+                password.encode(
+                    "utf-8"), PWD_HASH_SALT, PWD_HASH_ITERATIONS
             )
-
+        )
 
     def create_user(self, data):
         data["password"] = self.get_hash(data.get("password"))
@@ -46,10 +46,10 @@ class UserService:
 
         if user:
             user.username = data.get("username")
-            user.password = data.get("password")
+            user.password = self.get_hash(data.get("password"))
             user.role = data.get("role")
 
-            self.user_dao.update_user()
+            self.user_dao.update_user(user)
         else:
             print(f"Пользователь с id {uid} не найден!")
 
