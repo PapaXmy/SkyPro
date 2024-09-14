@@ -9,7 +9,7 @@ class DirectorService:
         return self.director_dao.get_director(did)
 
     def get_directors(self):
-        return self.director_dao.get_all_diretors()
+        return self.director_dao.get_all_directors()
 
     def create_director(self, data):
         return self.director_dao.create_director(data)
@@ -23,7 +23,7 @@ class DirectorService:
 
             self.director_dao.update_director(director)
         else:
-            print(f"Фильм с id {did} не найден!")
+            print(f"Режисер с id {did} не найден!")
 
     def delete_director(self, did):
         director = self.get_director(did)
@@ -31,4 +31,4 @@ class DirectorService:
         if director:
             self.director_dao.delete_director(did)
         else:
-            print(f"Фильм с id {did} не найден!")
+            print(f"Режисер с id {did} не найден!")

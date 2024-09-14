@@ -16,7 +16,7 @@ class GenreService:
 
     def update_genre(self, data):
         gid = data.get("id")
-        genre = self.__getattribute__(gid)
+        genre = self.get_genre(gid)
 
         if genre:
             genre.name = data.get("name")
@@ -30,6 +30,6 @@ class GenreService:
         genre = self.get_genre(gid)
 
         if genre:
-            self.genre_dao.delete(gid)
+            self.genre_dao.delete_genre(gid)
         else:
             print(f"Жанр с id {gid} не найден!")

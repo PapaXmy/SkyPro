@@ -27,7 +27,7 @@ class MoviesView(Resource):
     def post(self):
         movie_json = request.json
         movie_service.create_movie(movie_json)
-        return "Филь добавлен!", 201
+        return "Фильм добавлен!", 201
 
 
 @movie_ns.route("/<int:uid>")
@@ -44,9 +44,9 @@ class MovieView(Resource):
         movie_json["id"] = uid
 
         movie_service.update_movie(movie_json)
-        return "Данные фильма изменены!", 204
+        return "Данные фильма изменены!", 200
 
     @admin_required
     def delete(self, uid: int):
         movie = movie_service.delete_movie(uid)
-        return f"Фильм {movie} удален!", 204
+        return f"Фильм {movie} удален!", 200
