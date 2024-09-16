@@ -15,3 +15,11 @@ home_16/__pycache__
 home_16/instance/homework_base.db
 home_17/__pycache__
 home_18/__pycache__
+cource_work_4/__pycache__
+cource_work_4/venv
+cource_work_4/ *.db
+cource_work_4/project/__pycache__
+cource_work_4/project/dao/__pycache__
+cource_work_4/project/services/__pycache__
+cource_work_4/project/setup/__pycache__
+cource_work_4/project/setup/api/__pycache__
