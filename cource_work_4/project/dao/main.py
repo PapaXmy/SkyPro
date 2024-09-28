@@ -1,5 +1,5 @@
 from project.dao.base import BaseDAO
-from project.models import Genre, Director, Movie
+from project.models import Genre, Director, Movie, User
 from werkzeug.exceptions import NotFound
 # from sqlalchemy.orm import Query
 from typing import List, Optional, TypeVar
@@ -38,3 +38,22 @@ class MoviesDAO(BaseDAO[Movie]):
             except NotFound:
                 return []
         return stmt.all()
+
+
+class UsersDAO(BaseDAO[User]):
+    __model__ = User
+
+    def create_user(self, user_data):
+        user = User(**user_data)
+
+        self._db_session.add(user)
+        self._db_session.commit()
+
+        return user
+
+    def update_user(self, user):
+
+        self._db_session.add(user)
+        self._db_session.commit()
+
+        return user

@@ -9,6 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 class BaseConfig:
     SECRET_KEY = os.getenv('SECRET_KEY', 'you-will-never-guess')
     JSON_AS_ASCII = False
+    JWT_ALGORITHM = "HS256"
 
     ITEMS_PER_PAGE = 12
 
@@ -33,11 +34,12 @@ class TestingConfig(BaseConfig):
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_ECHO = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" + BASE_DIR.joinpath('project.db').as_posix()
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + \
+        BASE_DIR.joinpath('project.db').as_posix()
 
 
 class ProductionConfig(BaseConfig):
-    DEBUG = False
+    DEBUG = True
     # TODO: дополнить конфиг
 
 
