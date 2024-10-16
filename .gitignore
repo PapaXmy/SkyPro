@@ -35,3 +35,7 @@ cource_work_4/project/views/main/__pycache__/__init__.cpython-312.pyc
 cource_work_4/project/views/main/__pycache__/directors.cpython-312.pyc
 cource_work_4/project/views/main/__pycache__/movies.cpython-312.pyc
 
+cource_work_4/tests/__pycache__
+cource_work_4/tests/dao/__pycache__
+cource_work_4/tests/services/__pycache__
+cource_work_4/tests/views/__pycache__

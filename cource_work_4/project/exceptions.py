@@ -8,3 +8,7 @@ class ItemNotFound(BaseServiceError):
 
 class Unauthorized(BaseServiceError):
     code = 401
+
+
+class DuplicateMovie(BaseServiceError):
+    pass

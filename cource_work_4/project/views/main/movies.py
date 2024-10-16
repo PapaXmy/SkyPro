@@ -8,9 +8,11 @@ api = Namespace('movies')
 
 @api.route('/')
 class MoviesView(Resource):
+    @api.doc('get_movie')
     @api.expect(page_parser, status_parser)
+    @api.expect(movie)
     @api.marshal_with(movie, as_list=True, code=200, description='ok')
-    def get(sel):
+    def get(self):
         """
         Получение всех фильмов.
         """
